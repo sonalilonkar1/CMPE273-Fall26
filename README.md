@@ -61,7 +61,6 @@ As a stretch goal, transaction-coordinator state could be stored in an etcd clus
 ---
 
 ## Idea 3: Distributed API Rate Limiter
-Project Idea
 
 **Proposed by:** Shirisha Gujja
 
