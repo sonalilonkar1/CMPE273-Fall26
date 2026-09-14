@@ -30,11 +30,33 @@ The project will demonstrate distributed-systems concepts such as partial failur
 
 ---
 
-## Idea 2: Project Title
+## Idea 2: LedgerMesh – Distributed Transaction Coordination for a Rewards System
 
-**Proposed by:** Team Member 2
+**Proposed by:** Shailen Sutradhar
 
-*Add the project idea here.*
+LedgerMesh is a distributed rewards system that compares different approaches for maintaining transaction correctness across independent services. Redeeming points is not a single operation: the system must deduct points, reserve a reward, record the redemption, and ensure that every service reaches a consistent outcome even if part of the transaction fails.
+
+The system will consist of several independent services:
+
+* A **Redemption Coordinator** will manage the complete redemption workflow.
+
+* A **Wallet Service** will maintain users’ points balances and process deductions and refunds.
+
+* A **Rewards Catalog Service** will manage available rewards and inventory.
+
+* An **Audit Ledger Service** will record redemption, failure, and compensation events.
+
+The same redemption workflow will be implemented using two distributed transaction approaches:
+
+* **Two-Phase Commit (2PC)** will ask every participating service to prepare the transaction before instructing all services to commit or abort.
+
+* The **Saga Pattern** will complete a sequence of local transactions and execute compensating actions, such as refunding points or releasing a reserved reward, if a later step fails.
+
+The services will run as separate containerized Python/FastAPI applications with independently owned data stores. They will communicate using APIs and asynchronous Kafka messages. OpenTelemetry traces, structured logs, and metrics will carry a common transaction ID across the services, allowing the team to observe each redemption and determine where and why it failed. Possible technologies include Python, FastAPI, Kafka, PostgreSQL, Docker, Kubernetes, OpenTelemetry, Prometheus, Grafana, and Jaeger.
+
+The project will demonstrate distributed-systems concepts such as distributed transactions, consistency, partial failures, idempotency, asynchronous communication, retries, compensation, and observability. We will compare 2PC and Saga by introducing coordinator crashes, participant failures, timeouts, and duplicate or reordered messages, then measuring transaction correctness, availability, latency, blocking behavior, compensation frequency, and recovery time.
+
+As a stretch goal, transaction-coordinator state could be stored in an etcd cluster to explore coordinator recovery and the consistency-versus-availability tradeoff during network partitions.
 
 ---
 
