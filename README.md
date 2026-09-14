@@ -60,11 +60,32 @@ As a stretch goal, transaction-coordinator state could be stored in an etcd clus
 
 ---
 
-## Idea 3: Project Title
+## Idea 3: Distributed API Rate Limiter
+Project Idea
 
-**Proposed by:** Team Member 3
+**Proposed by:** Shirisha Gujja
 
-*Add the project idea here.*
+Modern applications often run multiple instances of the same API behind a load balancer. A rate limiter running independently inside each server cannot enforce a true global request limit because each server only knows about the requests it receives.
+
+For example, if a user is limited to 100 requests per minute and requests are distributed across three API servers, independent rate limiters could collectively allow more than 100 requests.
+
+This project will build a Distributed API Rate Limiter that enforces request limits consistently across multiple API server instances using shared distributed state.
+
+**Core Features**
+
+* A **Load Balancer** will route incoming traffic across multiple backend instances.
+
+* Multiple **API Services** will process requests in parallel.
+
+* A **Rate Limiting Service** will check whether a request should proceed or be throttled.
+
+* **Redis** will keep the request-counting information shared across the system.
+
+The rate limiter will use a **Token Bucket approach** so that each client receives a configurable request allowance over time. Limits can be applied using identifiers such as API keys, user IDs, or IP addresses. Requests beyond the allowed rate will be rejected with an HTTP 429 response.
+
+Possible technologies include Python/FastAPI or Java/Spring Boot, Redis, NGINX, Docker, Kubernetes, Prometheus, Grafana.
+
+The project will explore distributed-systems topics including concurrent access to shared state, coordination between multiple service instances, horizontal scaling, load balancing, fault handling, and monitoring. Testing will include high-concurrency traffic, scaling the number of API instances, and intentionally stopping services to observe whether rate limiting continues to behave correctly.
 
 ---
 
