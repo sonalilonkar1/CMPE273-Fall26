@@ -88,8 +88,28 @@ The project will explore distributed-systems topics including concurrent access 
 
 ---
 
-## Idea 4: Project Title
+## Idea 4: OnboardFlow: Employee Onboarding and Task Tracking Portal
 
-**Proposed by:** Team Member 4
+**Proposed by:** Deven Desai
 
-*Add the project idea here.*
+Starting a new job often requires coordination between Human Resources, a hiring manager, Information Technology, and the new employee. Important activities such as submitting documents, completing training, requesting equipment, and granting system access are often managed through emails and spreadsheets. This can make it difficult to see what is complete, what is overdue, and who is responsible for the next step.
+
+OnboardFlow is a distributed employee onboarding portal that brings these activities into one place. When Human Resources creates an onboarding plan, the system will generate and assign tasks based on the employee's role, department, and start date. The new employee can see their assigned tasks and upload required documents, while the responsible teams can update progress and communicate through the portal.
+
+The system will include the following services:
+
+* An **Onboarding Service** will create employee profiles, onboarding plans, and task lists.
+
+* A **Task Service** will assign tasks, track due dates, and update completion status.
+
+* A **Training Service** will manage required courses and record training completion.
+
+* An **Equipment and Access Service** will handle laptop, badge, software, and system access requests.
+
+* A **Notification Service** will send reminders when tasks are approaching their due date or remain incomplete.
+
+* A **Reporting Service** will provide dashboards showing onboarding progress, overdue tasks, and completion time by department.
+
+The portal will support role based access for Human Resources administrators, hiring managers, Information Technology staff, and new employees. The services can communicate through REST APIs and asynchronous messages so that an update in one service, such as a completed background check or training course, can trigger the next required task without manual follow up.
+
+Possible technologies include Python with FastAPI or Java with Spring Boot, PostgreSQL, Kafka or RabbitMQ, Redis, Docker, Kubernetes, and React. The project will demonstrate enterprise and distributed systems concepts including service ownership, asynchronous communication, reliable event processing, retries, idempotency, access control, observability, and handling partial failures. We can test the system by simulating delayed equipment requests, duplicate messages, unavailable services, and incomplete onboarding tasks.
